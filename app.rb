@@ -25,12 +25,14 @@ enable :sessions
   get '/attack_player1' do
     @game = $game
     @game.attack(@game.player_1)
+    @game.switch
     erb :attack_player1
   end
 
   get '/attack_player2' do
     @game = $game
     @game.attack(@game.player_2)
+    @game.switch
     erb :attack_player2
   end
 
