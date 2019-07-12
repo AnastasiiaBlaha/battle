@@ -22,10 +22,16 @@ enable :sessions
     erb :play
   end
 
-  get '/attack' do
+  get '/attack_player1' do
+    @game = $game
+    @game.attack(@game.player_1)
+    erb :attack_player1
+  end
+
+  get '/attack_player2' do
     @game = $game
     @game.attack(@game.player_2)
-    erb :attack
+    erb :attack_player2
   end
 
  run! if app_file == $0
