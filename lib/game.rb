@@ -3,6 +3,7 @@ class Game
   def initialize(player_1, player_2)
     @player_1 = player_1
     @player_2 = player_2
+    @players = [player_1, player_2]
     @current_turn = player_1
   end
 
@@ -29,5 +30,22 @@ class Game
       @current_turn = @player_1
     end
   end
-  
+
+  def other_player
+    temp = [@player_1, @player_2]
+    temp -= [@current_turn]
+    temp[0]
+  end
+
+  def game_over?
+    losing_players.any?
+  end
+
+  def loser
+    losing_players.first
+  end
+
+  def losing_players
+    @players.select { |player| player.hit_points <= 0}
+  end
 end

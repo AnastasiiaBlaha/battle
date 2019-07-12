@@ -22,18 +22,20 @@ enable :sessions
     erb :play
   end
 
-  get '/attack_player1' do
+  get '/attack' do
     @game = $game
-    @game.attack(@game.player_1)
+    @game.attack(@game.other_player)
     @game.switch
-    erb :attack_player1
+    if $game.game_over?
+      redirect '/game-over'
+    else
+      erb :attack
+    end
   end
 
-  get '/attack_player2' do
+  get '/game-over' do
     @game = $game
-    @game.attack(@game.player_2)
-    @game.switch
-    erb :attack_player2
+    erb :game_over
   end
 
  run! if app_file == $0
